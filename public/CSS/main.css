@@ -1,0 +1,36 @@
+h1 a {
+  color: blue;
+}
+
+div .header {
+  display: flex;
+  position: fixed;
+  top: 80px;
+}
+
+
+div .location {
+  width: 30%;
+
+}
+
+div .location_box {
+  border: 1px solid;
+}
+
+div .dealing_goods {
+  width: 80%;
+}
+
+div .dealing_goods_box {
+  border: 1px solid;
+}
+
+div .goods_category {
+  margin-top: 200px;
+}
+
+div .goods_list {
+  border: 1px solid;
+  margin-top: 200px;
+}
