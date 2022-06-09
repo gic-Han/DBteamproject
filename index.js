@@ -1,15 +1,19 @@
 var express = require('express'); // 설치한 express module을 불러와서 변수(express)에 담습니다.
 var app = express(); //express를 실행하여 app object를 초기화 합니다.
 
-app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res){
+  res.render('menu/home');
+});
 
 app.get('/CVS', function(req, res){
-  res.render('CVS');
+  res.render('menu/CVS');
 });
 
 app.get('/GDS', function(req, res){
-  res.render('GDS');
+  res.render('menu/GDS');
 });
 
 var port = 3000; // 사용할 포트 번호를 port 변수에 넣습니다.
