@@ -1,36 +1,84 @@
-h1 a {
+
+
+
+h1 {
   color: blue;
+  font-size: 80px;
+  margin-top: 40px;
+  text-align: center;
 }
 
-div .header {
-  display: flex;
-  position: fixed;
-  top: 80px;
+button {
+  background-color: transparent;
+  border: none;
+  height: 40px;
+  margin-left: 80px;
+  width: 120px;
+}
+
+button:hover {
+  background-color: #EEEEEE;
+  border-radius: 5px;
+}
+
+.chosen {
+  background-color: #DDDDDD;
+  border-radius: 5px;
+}
+
+.chosen:hover {
+  background-color: #DDDDDD;
+  border-radius: 5px;
+}
+
+.header {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  width: 900px;
 }
 
 
-div .location {
+
+.location {
+  display: inline-grid;
+  text-align: center;
   width: 30%;
-
 }
 
-div .location_box {
+.location_box {
   border: 1px solid;
+  border-radius: 5px;
+  height: 700px;
 }
 
-div .dealing_goods {
-  width: 80%;
+.dealing_goods {
+  display: inline-grid;
+  text-align: center;
+  width: 60%;
 }
 
-div .dealing_goods_box {
+.dealing_goods_box {
   border: 1px solid;
+  border-radius: 5px;
+  height: 700px;
 }
 
-div .goods_category {
-  margin-top: 200px;
+
+
+.goods_category {
+  margin: 40px 80px 1px 80px;
 }
 
-div .goods_list {
+.goods_list {
   border: 1px solid;
-  margin-top: 200px;
+  border-radius: 5px;
+  height: 700px;
+  margin: 1px 80px 1px 80px;
+}
+
+
+
+.cards_list {
+  margin: 40px 80px 40px 80px;
 }

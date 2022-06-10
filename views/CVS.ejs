@@ -11,25 +11,26 @@
   <body>
     <div class="header">
       <a href="/">UOS25</a>
-      <button type="button" name="button"><a href="/CVS">편의점</a></button>
-      <button type="button" name="button"><a href="/GDS">물품</a></button>
-      <button type="button" name="button"><a href="/CARD">제휴카드</a></button>
-      <button type="button" name="button"><a href="/SCRPT">구독</a></button>
+      <button type="button" onclick="location.href='/CVS';" class="chosen">편의점</button>
+      <button type="button" onclick="location.href='/GDS';">물품</button>
+      <button type="button" onclick="location.href='/CARD';">제휴카드</button>
+      <button type="button" onclick="location.href='/SCRPT';">구독</button>
     </div>
 
-    <div class="location">
-      <p>위치</p>
-      <div class="location_box">
-        <p></p>
+    <div style="margin-top: 40px; margin-left: 80px;">
+      <div class="location">
+        <p>위치</p>
+        <div class="location_box">
+        </div>
+      </div>
+
+      <div class="dealing_goods">
+        <p>취급물품</p>
+        <div class="dealing_goods_box">
+        </div>
       </div>
     </div>
 
-    <div class="dealing_goods">
-      <p>취급물품</p>
-      <div class="dealing_goods_box">
-        <p></p>
-      </div>
-    </div>
 
   </body>
 
