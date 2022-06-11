@@ -82,3 +82,21 @@ button:hover {
 .cards_list {
   margin: 40px 80px 40px 80px;
 }
+
+
+
+.pay_box {
+  border: 1px solid;
+  border-radius: 5px;
+  display: inline-flex;
+  height: 700px;
+  width: 900px;
+}
+
+.pay_way {
+  border: 1px solid;
+  border-radius: 5px;
+  display: inline-flex;
+  height: 700px;
+  width: 240px;
+}

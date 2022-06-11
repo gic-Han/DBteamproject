@@ -1,5 +1,42 @@
 var express = require('express'); // 설치한 express module을 불러와서 변수(express)에 담습니다.
 var app = express(); //express를 실행하여 app object를 초기화 합니다.
+var oracledb = require('oracledb');
+var config = {
+  user: "gichan",
+  password: "gichan",
+  connectString: "주소/xe"
+};
+
+oracledb.getConnection(config, (err, conn) =>{
+    todoWork(err, conn);
+});
+
+function todoWork(err, connection) {
+    if (err) {
+        console.error(err.message);
+        return;
+    }
+    connection.execute("select * from test", [], function (err, result) {
+        if (err) {
+            console.error(err.message);
+            doRelease(connection);
+            return;
+        }
+        console.log(result.metaData);  //테이블 스키마
+        console.log(result.rows);  //데이터
+        doRelease(connection);
+    });
+}
+
+function doRelease(connection) {
+    connection.release(function (err) {
+        if (err) {
+            console.error(err.message);
+        }
+    });
+}
+
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -18,6 +55,10 @@ app.get('/CARD', function(req, res){
 
 app.get('/SCRPT', function(req, res){
   res.render('SCRPT');
+});
+
+app.get('/pay', function(req, res){
+  res.render('PAY');
 });
 
 var port = 3000; // 사용할 포트 번호를 port 변수에 넣습니다.
