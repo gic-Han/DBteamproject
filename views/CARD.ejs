@@ -18,6 +18,12 @@
     </div>
 
     <div class="cards_list">
+      <% CARDlists.forEach(function(CARDlist) { %>
+      <li>
+          <p>카드종류:<%= CARDlist[1] %></p>
+          <p>할인률:<%= CARDlist[2] %>%</p>
+      </li>
+      <% }) %>
     </div>
 
 

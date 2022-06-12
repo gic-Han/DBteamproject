@@ -135,15 +135,55 @@ router.get('/GDS', function(req, res) {
   }
 });
 
+router.get('/CARD', function(req, res) {
+  oracledb.getConnection({
+      user : config.user,
+      password : config.password,
+      connectString : config.connectString
+    },
+    function(err, connection){
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      console.log('==>userlist search query');
+
+      var query = "select * from PAY_WAY";
+
+      connection.execute(query, function(err, result) {
+        if (err) {
+          console.error(err.message);
+
+          doRelease(connection);
+          return;
+        }
+
+        console.log(result.rows);
+
+        doRelease(connection, result.rows);
+    });
+  });
+
+  function doRelease(connection, userlist) {
+    connection.close(function(err){
+      if (err) {
+        console.error(err.message);
+      }
+      console.log('list size ' + userlist.length);
+
+      for(var i=0; i>userlist.length; i++){
+        console.log('name: ' + userlist[i][1]);
+      }
+
+      res.render('CARD',{CARDlists:userlist});
+    });
+  }
+});
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/', router);
-
-
-app.get('/CARD', function(req, res){
-  res.render('CARD');
-});
 
 app.get('/SCRPT', function(req, res){
   res.render('SCRPT');
