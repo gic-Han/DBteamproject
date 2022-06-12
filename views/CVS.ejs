@@ -21,12 +21,28 @@
       <div class="location">
         <p>위치</p>
         <div class="location_box">
+          <ul>
+            <% CVSlists.forEach(function(CVSlist) { %>
+            <li>
+              <form class="" action="CVS.ejs" method="post">
+                <%= CVSlist[2] %>
+              </form>
+            </li>
+            <% }) %>
+          </ul>
         </div>
       </div>
 
       <div class="dealing_goods">
         <p>취급물품</p>
         <div class="dealing_goods_box">
+          <ul>
+            <% CVSgoods.forEach(function(CVSgood) { %>
+            <li>
+                <%= CVSgood %>
+            </li>
+            <% }) %>
+          </ul>
         </div>
       </div>
     </div>

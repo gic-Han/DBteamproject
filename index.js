@@ -5,7 +5,7 @@ var oracledb = require('oracledb');
 var config = {
   user: "...",
   password: "...",
-  connectString: "localhost/orcl"
+  connectString: "localhost/XE"
 };
 
 oracledb.getConnection(config, (err, conn) =>{
@@ -38,17 +38,110 @@ function doRelease(connection) {
 }
 
 
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
-app.use('/dbtest', require('./route/dbtest'));
-
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 
+var router = express.Router();
 
-app.get('/CVS', function(req, res){
-  res.render('CVS');
+oracledb.autocommit = true;
+
+router.get('/CVS', function(req, res) {
+  oracledb.getConnection({
+      user : config.user,
+      password : config.password,
+      connectString : config.connectString
+    },
+    function(err, connection){
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      console.log('==>userlist search query');
+
+      var query = "select * from CVS";
+
+      connection.execute(query, function(err, result) {
+        if (err) {
+          console.error(err.message);
+
+          doRelease(connection);
+          return;
+        }
+
+        console.log(result.rows);
+
+        doRelease(connection, result.rows);
+    });
+  });
+
+  function doRelease(connection, userlist) {
+    connection.close(function(err){
+      if (err) {
+        console.error(err.message);
+      }
+      console.log('list size ' + userlist.length);
+
+      for(var i=0; i>userlist.length; i++){
+        console.log('name: ' + userlist[i][1]);
+      }
+
+      res.render('CVS',{CVSlists:userlist});
+    });
+  }
 });
+
+router.post('/CVS', function(req, res) {
+  oracledb.getConnection({
+      user : config.user,
+      password : config.password,
+      connectString : config.connectString
+    },
+    function(err, connection){
+      if (err) {
+        console.error(err.message);
+        return;
+      }
+      console.log('==>userlist search query');
+
+      var query = "select * from GDS_LIST where GDS_LIST = " + req.index;
+
+      connection.execute(query, function(err, result) {
+        if (err) {
+          console.error(err.message);
+
+          doRelease(connection);
+          return;
+        }
+
+        console.log(result.rows);
+
+        doRelease(connection, result.rows);
+    });
+  });
+
+  function doRelease(connection, userlist) {
+    connection.close(function(err){
+      if (err) {
+        console.error(err.message);
+      }
+      console.log('list size ' + userlist.length);
+
+      for(var i=0; i>userlist.length; i++){
+        console.log('name: ' + userlist[i][1]);
+      }
+
+      res.send(userlist);
+    });
+  }
+});
+
+
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+app.use('/', router);
+
+
+
 
 app.get('/GDS', function(req, res){
   res.render('GDS');
