@@ -3,9 +3,9 @@ var bodyparser = require('body-parser');
 var app = express(); //express를 실행하여 app object를 초기화 합니다.
 var oracledb = require('oracledb');
 var config = {
-  user: "...",
-  password: "...",
-  connectString: "localhost/XE"
+  user: "jeongyechan",
+  password: "jeongyechan",
+  connectString: "localhost/xe"
 };
 
 oracledb.getConnection(config, (err, conn) =>{
@@ -17,7 +17,7 @@ function todoWork(err, connection) {
         console.error(err.message);
         return;
     }
-    connection.execute("select * from CVS", [], function (err, result) {
+    connection.execute("select * from GDS", [], function (err, result) {
         if (err) {
             console.error(err.message);
             doRelease(connection);
@@ -90,7 +90,7 @@ router.get('/CVS', function(req, res) {
   }
 });
 
-router.post('/CVS', function(req, res) {
+router.get('/GDS', function(req, res) {
   oracledb.getConnection({
       user : config.user,
       password : config.password,
@@ -103,7 +103,7 @@ router.post('/CVS', function(req, res) {
       }
       console.log('==>userlist search query');
 
-      var query = "select * from GDS_LIST where GDS_LIST = " + req.index;
+      var query = "select * from GDS";
 
       connection.execute(query, function(err, result) {
         if (err) {
@@ -130,7 +130,7 @@ router.post('/CVS', function(req, res) {
         console.log('name: ' + userlist[i][1]);
       }
 
-      res.send(userlist);
+      res.render('GDS',{GDSlists:userlist});
     });
   }
 });
@@ -140,12 +140,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/', router);
 
-
-
-
-app.get('/GDS', function(req, res){
-  res.render('GDS');
-});
 
 app.get('/CARD', function(req, res){
   res.render('CARD');

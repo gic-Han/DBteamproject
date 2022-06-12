@@ -26,7 +26,12 @@
     </div>
 
     <div class="goods_list">
-      <p> </p>
+        <% GDSlists.forEach(function(GDSlist) { %>
+        <div class="good_item">
+          <p>이름:<%= GDSlist[1] %></p>
+          <p>가격:<%= GDSlist[2] %></p>
+        </div>
+        <% }) %>
     </div>
 
   </body>

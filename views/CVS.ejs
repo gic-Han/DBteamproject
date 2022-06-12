@@ -24,9 +24,7 @@
           <ul>
             <% CVSlists.forEach(function(CVSlist) { %>
             <li>
-              <form class="" action="CVS.ejs" method="post">
-                <%= CVSlist[2] %>
-              </form>
+                <button type="button" onclick="location.href='/CVS/demo';"><%= CVSlist[2] %></button>
             </li>
             <% }) %>
           </ul>
@@ -37,11 +35,7 @@
         <p>취급물품</p>
         <div class="dealing_goods_box">
           <ul>
-            <% CVSgoods.forEach(function(CVSgood) { %>
-            <li>
-                <%= CVSgood %>
-            </li>
-            <% }) %>
+
           </ul>
         </div>
       </div>

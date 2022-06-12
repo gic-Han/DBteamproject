@@ -71,10 +71,22 @@ button:hover {
 }
 
 .goods_list {
+  display: grid;
   border: 1px solid;
   border-radius: 5px;
+  grid-template-columns: 400px 400px 400px 400px;
+  grid-template-rows: 200px 200px;
+  grid-gap: 20px;
   height: 700px;
   margin: 1px 80px 1px 80px;
+}
+
+.good_item {
+  border: 1px solid;
+  border-radius: 5px;
+  height: 200px;
+  width: 400px;
+  margin:40px 20px 40px 20px;
 }
 
 
