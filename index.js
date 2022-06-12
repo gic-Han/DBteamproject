@@ -1,10 +1,11 @@
 var express = require('express'); // 설치한 express module을 불러와서 변수(express)에 담습니다.
+var bodyparser = require('body-parser');
 var app = express(); //express를 실행하여 app object를 초기화 합니다.
 var oracledb = require('oracledb');
 var config = {
-  user: "gichan",
-  password: "gichan",
-  connectString: "주소/xe"
+  user: "...",
+  password: "...",
+  connectString: "localhost/orcl"
 };
 
 oracledb.getConnection(config, (err, conn) =>{
@@ -16,7 +17,7 @@ function todoWork(err, connection) {
         console.error(err.message);
         return;
     }
-    connection.execute("select * from test", [], function (err, result) {
+    connection.execute("select * from CVS", [], function (err, result) {
         if (err) {
             console.error(err.message);
             doRelease(connection);
@@ -37,9 +38,13 @@ function doRelease(connection) {
 }
 
 
-
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use('/dbtest', require('./route/dbtest'));
+
+app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyparser.json());
+
 
 app.get('/CVS', function(req, res){
   res.render('CVS');
